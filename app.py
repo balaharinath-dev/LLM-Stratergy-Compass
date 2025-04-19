@@ -184,7 +184,7 @@ class TokenEstimationTool(BaseTool):
         try:
             # Use the LLM to analyze the use case and generate estimates
             llm = GoogleGenerativeAI(
-                model="gemini/gemini-1.5-flash",
+                model="gemini/gemini-pro",
                 google_api_key=os.getenv("GEMINI_API_KEY", ""),
                 temperature=0.1,
                 top_p=0.9,
