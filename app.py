@@ -1,6 +1,6 @@
-# import sys
-# __import__('pysqlite3')
-# sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+import sys
+__import__('pysqlite3')
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import os
 import json
@@ -185,7 +185,7 @@ class TokenEstimationTool(BaseTool):
             # Use the LLM to analyze the use case and generate estimates
             llm = GoogleGenerativeAI(
                 model="gemini/gemini-pro",
-                google_api_key=os.getenv("GEMINI_API_KEY", ""),
+                google_api_key=st.secrets.get("GEMINI_API_KEY", ""),
                 temperature=0.1,
                 top_p=0.9,
             )
@@ -256,7 +256,7 @@ class LLMStrategyCompass:
     
     def __init__(self):
         """Initialize the system with required models and tools."""
-        self.gemini_api_key = os.getenv("GEMINI_API_KEY", "")
+        self.gemini_api_key = st.secrets.get("GEMINI_API_KEY", "")
         
         # Initialize LLM
         self.llm = GoogleGenerativeAI(
@@ -543,7 +543,7 @@ class LLMStrategyCompass:
 class ChatbotInteraction:
     def __init__(self):
         """Initialize the chatbot interaction system."""
-        self.gemini_api_key = os.getenv("GEMINI_API_KEY", "")
+        self.gemini_api_key = st.secrets.get("GEMINI_API_KEY", "")
         self.llm = GoogleGenerativeAI(
             model="gemini/gemini-2.0-flash-lite",
             google_api_key=self.gemini_api_key,
